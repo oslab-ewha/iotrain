@@ -6,8 +6,8 @@ class Conf:
     def __init__(self, optspec, usage):
         self.usage = usage
         self.path = None
-
-        self.__parseArgs("h" + optspec)
+        self.path_model = None
+        self.__parseArgs("hm:" + optspec)
 
     def __parseArgs(self, optspec):
         try:
@@ -21,6 +21,8 @@ class Conf:
             if o == '-h':
                 self.usage()
                 exit(0)
+            elif o == '-m':
+                self.path_model = a
             else:
                 self.handleOpt(o, a)
         if len(args) < 1:

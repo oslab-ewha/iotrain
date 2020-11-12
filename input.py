@@ -13,7 +13,7 @@ class Input:
             f = open(path, "r")
         except IOError:
             logger.error("csv file not found: {}".format(path))
-            return False
+            exit(1)
 
         self.reader = csv.reader(f, delimiter = ',')
         row = next(self.reader)
@@ -21,21 +21,21 @@ class Input:
         f.seek(0)
 
     def __iter__(self):
-        self.__index = 0
         return self
 
     def __next__(self):
         data = []
         labels = []
         for i in range(self.n_chunk):
-            row = next(self.reader)
-            if row is None:
+            try:
+                row = next(self.reader)
+            except StopIteration:
                 break
             labels.append(self.__to_floats(row[:self.n_targets]))
             data.append(self.__to_floats(row[self.n_targets:]))
         if len(data) == 0:
             raise StopIteration
-        return [data], [labels]
+        return data, labels
 
     def __to_floats(self, arr):
         arr_f = []
