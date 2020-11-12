@@ -2,14 +2,17 @@ import sys
 import getopt
 import logger
 
+path = None
+path_model = None
+
 class Conf:
     def __init__(self, optspec, usage):
         self.usage = usage
-        self.path = None
-        self.path_model = None
         self.__parseArgs("hm:" + optspec)
 
     def __parseArgs(self, optspec):
+        global  path, path_model
+
         try:
             opts, args = getopt.getopt(sys.argv[1:], optspec)
         except getopt.GetoptError:
@@ -22,13 +25,13 @@ class Conf:
                 self.usage()
                 exit(0)
             elif o == '-m':
-                self.path_model = a
+                path_model = a
             else:
                 self.handleOpt(o, a)
         if len(args) < 1:
             return False
 
-        self.path = args[0]
+        path = args[0]
         return True
 
     def handleOpt(self, o, a):

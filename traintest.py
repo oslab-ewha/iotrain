@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import logger
-from conf import Conf
+import conf
 
 def __usage_traintest():
     print("""\
@@ -12,7 +12,7 @@ Usage: traintest.py [<options>] <path>
 """)
 
 class TrainTest:
-    def testTrain(self, conf):
+    def testTrain(self):
         from input_test import InputTest
         from model import TrainModel
 
@@ -28,7 +28,5 @@ if __name__ == "__main__":
     logger.init("testtrain")
 
     tt = traintest.TrainTest()
-
-    exit(tt.testTrain(Conf("", __usage_traintest)))
-
-
+    conf.Conf("", __usage_traintest)
+    exit(tt.testTrain())
