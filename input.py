@@ -9,6 +9,8 @@ class Input:
         self.n_data = 0
 
     def load(self, path):
+        if self.n_chunk == 0:
+            self.n_chunk = self.__linecounts(path)
         try:
             f = open(path, "r")
         except IOError:
@@ -19,6 +21,11 @@ class Input:
         row = next(self.reader)
         self.n_data = len(row) - self.n_targets
         f.seek(0)
+
+    def __linecounts(self, path):
+        count = 0
+        for line in open(path): count += 1
+        return count
 
     def __iter__(self):
         return self

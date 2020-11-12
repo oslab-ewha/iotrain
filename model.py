@@ -12,7 +12,7 @@ class TrainModel:
     def __build_model(self, n_inputs):
         self.model = Sequential()
         self.model.add(Dense(int(n_inputs / 4), input_dim = n_inputs, activation=None))
-        self.model.add(Dense(3))
+        self.model.add(Dense(3, activation='softmax'))
 
         self.model.compile(loss='categorical_crossentropy', optimizer = 'adam', metrics=['accuracy'])
 
@@ -33,5 +33,15 @@ class TrainModel:
     def test(self, input_test):
         for data, labels in input_test:
             r = self.model.evaluate([data], [labels])
-            print(self.model.metrics_names)
             print(r)
+
+    def predict(self, inputs):
+        for data, labels in inputs:
+            predicted = self.model.predict([data])
+            print(self.__to_readable_floats(labels[0]), self.__to_readable_floats(predicted[0]))
+
+    def __to_readable_floats(self, floats):
+        floats_readable = []
+        for f in floats:
+            floats_readable.append(round(f, 4))
+        return floats_readable

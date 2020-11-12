@@ -21,7 +21,7 @@ class IoTrain:
         from input_test import InputTest
         from model import TrainModel
 
-        input = InputTrain(3, 100)
+        input = InputTrain(3, 0)
         input.load(conf.path)
 
         if not conf.clearModel and os.path.exists(conf.path_model):
