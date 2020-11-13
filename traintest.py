@@ -13,14 +13,12 @@ Usage: traintest.py [<options>] <path>
 
 class TrainTest:
     def testTrain(self):
-        from input_test import InputTest
-        from model import TrainModel
+        import input
+        import model
 
-        model = TrainModel(conf.path_model)
-
-        input_test = InputTest(3, 100)
-        input_test.load(conf.path)
-        model.test(input_test)
+        input = input.load()
+        model_test = model.create(input)
+        model_test.test(input)
 
 if __name__ == "__main__":
     import traintest

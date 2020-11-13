@@ -13,14 +13,12 @@ Usage: iopredict.py [<options>] <path>
 
 class IoPredict:
     def predict(self):
-        from input_test import InputTest
-        from model import TrainModel
+        import input
+        import model
 
-        model = TrainModel(conf.path_model)
-
-        input_pred = InputTest(3, 1)
-        input_pred.load(conf.path)
-        model.predict(input_pred)
+        input = input.load()
+        model_pred = model.create(input)
+        model_pred.predict(input)
 
 if __name__ == "__main__":
     from iopredict import IoPredict

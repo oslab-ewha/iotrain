@@ -1,9 +1,6 @@
 from input import Input
 
-class InputTrain(Input):
-    def __init__(self, n_targets, n_chunk):
-        super().__init__(n_targets, n_chunk)
-
+class InputTrainFF(Input):
     def __next__(self):
         data, labels = super().__next__()
         return [data], [labels]
