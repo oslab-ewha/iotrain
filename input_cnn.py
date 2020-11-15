@@ -3,8 +3,8 @@ import conf
 
 class InputCNN(InputBase):
     def __next__(self):
-        data, labels = super().__next__()
-        return self.__get_2d_inputs(conf.width, conf.height, data), labels
+        data, labels1, labels2 = super().__next__()
+        return self.__get_2d_inputs(conf.width, conf.height, data), labels1, labels2
 
     def __get_2d_inputs(self, x, y, arr):
         arr2d = []

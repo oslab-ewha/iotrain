@@ -4,7 +4,7 @@ class ConfIotrain(conf.Conf):
     def __init__(self, usage):
         conf.epochs = 10
         conf.clearModel = False
-        conf.width = 10
+        conf.width = 5
         conf.height = 10
 
         super().__init__('e:Cd:', usage)

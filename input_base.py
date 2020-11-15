@@ -3,7 +3,7 @@ import logger
 
 class InputBase:
     def __init__(self):
-        self.n_targets = 3
+        self.n_targets = 6
         self.reader = None
         self.n_data = 0
 
@@ -24,18 +24,20 @@ class InputBase:
 
     def __next__(self):
         data = []
-        labels = []
+        labels1 = []
+        labels2 = []
         while True:
             try:
                 row = next(self.reader)
-                labels.append(self.__to_floats(row[:self.n_targets]))
+                labels1.append(self.__to_floats(row[:3]))
+                labels2.append(self.__to_floats(row[3:6]))
                 data.append(self.__to_floats(row[self.n_targets:]))
             except StopIteration:
                 break
 
         if len(data) == 0:
             raise StopIteration
-        return data, labels
+        return data, labels1, labels2
 
     def __to_floats(self, arr):
         arr_f = []
