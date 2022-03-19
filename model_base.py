@@ -11,8 +11,8 @@ class TrainModelBase:
 
     def __build_model(self, n_inputs):
         input, out_layer = self.setup_layers(n_inputs)
-        out_read = Dense(3, activation='softmax')(out_layer)
-        out_write = Dense(3, activation='softmax')(out_layer)
+        out_read = Dense(3, name='read', activation='softmax')(out_layer)
+        out_write = Dense(3, name='write', activation='softmax')(out_layer)
         self.model = Model(inputs = input, outputs = [out_read, out_write])
         self.model.compile(loss='categorical_crossentropy', optimizer = 'adam', metrics=['accuracy'])
 

@@ -10,7 +10,7 @@ def create(input):
         from model_cnn import TrainModelCNN
         clsModel = TrainModelCNN
 
-    if not conf.clearModel and os.path.exists(conf.path_model):
+    if not conf.clearModel and conf.path_model and os.path.exists(conf.path_model):
         model = clsModel(conf.path_model)
     else:
         model = clsModel(input.n_data)
